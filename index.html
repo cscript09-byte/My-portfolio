@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CODECORE_X | Premium Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+:root{
+--bg:#050816;
+--card:rgba(255,255,255,.08);
+--primary:#38bdf8;
+--secondary:#22c55e;
+--text:#ffffff;
+--muted:#94a3b8;
+}
+
+body{
+background:var(--bg);
+color:var(--text);
+overflow-x:hidden;
+}
+
+#loader{
+position:fixed;
+inset:0;
+background:#050816;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:99999;
+}
+
+.loader-text{
+font-size:3rem;
+font-weight:800;
+background:linear-gradient(90deg,#38bdf8,#22c55e);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+50%{opacity:.4}
+}
+
+#progressBar{
+position:fixed;
+top:0;
+left:0;
+height:4px;
+width:0%;
+background:linear-gradient(90deg,#38bdf8,#22c55e);
+z-index:999999;
+}
+
+.background{
+position:fixed;
+inset:0;
+z-index:-2;
+background:
+radial-gradient(circle at 20% 20%,rgba(56,189,248,.15),transparent 25%),
+radial-gradient(circle at 80% 80%,rgba(34,197,94,.15),transparent 25%),
+#050816;
+}
+
+header{
+position:fixed;
+top:0;
+width:100%;
+padding:20px 7%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+backdrop-filter:blur(15px);
+background:rgba(5,8,22,.7);
+z-index:1000;
+}
+
+.logo{
+font-size:1.6rem;
+font-weight:800;
+}
+
+.logo span{
+color:#38bdf8;
+}
+
+nav a{
+text-decoration:none;
+color:white;
+margin-left:25px;
+transition:.3s;
+}
+
+nav a:hover{
+color:#38bdf8;
+}
+
+.hero{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:0 8%;
+}
+
+.hero-content h1{
+font-size:clamp(3rem,8vw,6rem);
+margin-bottom:10px;
+}
+
+.hero-content h1 span{
+color:#38bdf8;
+}
+
+.typing{
+height:40px;
+font-size:1.4rem;
+color:#38bdf8;
+margin-bottom:20px;
+font-weight:600;
+}
+
+.hero-content p{
+max-width:750px;
+margin:auto;
+line-height:1.8;
+color:var(--muted);
+}
+
+.btn-group{
+margin-top:30px;
+display:flex;
+justify-content:center;
+gap:15px;
+flex-wrap:wrap;
+}
+
+.btn{
+padding:14px 25px;
+border-radius:15px;
+font-weight:700;
+text-decoration:none;
+transition:.3s;
+}
+
+.btn-primary{
+background:linear-gradient(135deg,#38bdf8,#06b6d4);
+color:black;
+}
+
+.btn-secondary{
+border:1px solid rgba(255,255,255,.15);
+color:white;
+}
+
+.btn:hover{
+transform:translateY(-5px);
+}
+
+section{
+padding:100px 8%;
+}
+
+.section-title{
+text-align:center;
+margin-bottom:50px;
+}
+
+.section-title h2{
+font-size:3rem;
+margin-bottom:10px;
+}
+
+.section-title p{
+color:var(--muted);
+}
+
+.glass-card{
+background:var(--card);
+backdrop-filter:blur(20px);
+border:1px solid rgba(255,255,255,.1);
+padding:30px;
+border-radius:25px;
+transition:.4s;
+}
+
+.glass-card:hover{
+transform:translateY(-10px);
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+}
+
+.stat{
+text-align:center;
+}
+
+.stat h3{
+font-size:3rem;
+color:#38bdf8;
+}
+
+.skills{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+}
+
+.skill{
+text-align:center;
+font-weight:700;
+}
+
+.projects{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:25px;
+}
+
+.project img{
+width:100%;
+height:220px;
+object-fit:cover;
+border-radius:15px;
+margin-bottom:15px;
+}
+
+.contact-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.contact-card{
+text-decoration:none;
+color:white;
+}
+
+footer{
+padding:30px;
+text-align:center;
+border-top:1px solid rgba(255,255,255,.1);
+color:var(--muted);
+}
+
+.whatsapp-float{
+position:fixed;
+bottom:25px;
+right:25px;
+width:65px;
+height:65px;
+border-radius:50%;
+background:#25D366;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:30px;
+text-decoration:none;
+color:white;
+box-shadow:0 0 30px rgba(37,211,102,.5);
+z-index:1000;
+}
+
+@media(max-width:768px){
+
+nav{
+display:none;
+}
+
+.hero-content h1{
+font-size:3rem;
+}
+
+}
+</style>
+</head>
+<body>
+
+<div id="loader">
+<div class="loader-text">CODECORE_X</div>
+</div>
+
+<div id="progressBar"></div>
+<div class="background"></div>
+
+<header>
+<div class="logo">CODECORE_<span>X</span></div>
+
+<nav>
+<a href="#about">About</a>
+<a href="#skills">Skills</a>
+<a href="#projects">Projects</a>
+<a href="#contact">Contact</a>
+</nav>
+</header>
+
+<section class="hero">
+
+<div class="hero-content">
+
+<h1>
+Building <span>Digital Experiences</span>
+</h1>
+
+<div class="typing" id="typing"></div>
+
+<p>
+Software Engineer passionate about creating modern web applications,
+beautiful interfaces, and scalable digital experiences.
+</p>
+
+<div class="btn-group">
+
+<a href="#projects" class="btn btn-primary">
+View Projects
+</a>
+
+<a href="mailto:cscript09@gmail.com"
+class="btn btn-secondary">
+Email Me
+</a>
+
+<a href="https://wa.me/qr/KQQT33SE7MJSE1"
+target="_blank"
+class="btn btn-secondary">
+WhatsApp
+</a>
+
+</div>
+
+</div>
+
+</section>
+<!-- ABOUT SECTION -->
+
+<section id="about">
+
+<div class="section-title">
+<h2>About Me</h2>
+<p>Passionate about technology, innovation and problem solving.</p>
+</div>
+
+<div class="glass-card">
+<p style="line-height:1.9;color:var(--muted);">
+
+I'm <strong>CODECORE_X</strong>, a software engineer focused on
+building responsive websites, web applications and digital experiences
+that are fast, reliable and visually impressive.
+
+I enjoy transforming ideas into real-world solutions using modern
+technologies and creative design principles. My goal is to create
+products that users love and businesses value.
+
+</p>
+</div>
+
+</section>
+
+<!-- STATS SECTION -->
+
+<section>
+
+<div class="section-title">
+<h2>Achievements</h2>
+<p>My journey so far.</p>
+</div>
+
+<div class="stats">
+
+<div class="glass-card stat">
+<h3 class="counter" data-target="2">0</h3>
+<p>Years Experience</p>
+</div>
+
+<div class="glass-card stat">
+<h3 class="counter" data-target="20">0</h3>
+<p>Projects Completed</p>
+</div>
+
+<div class="glass-card stat">
+<h3 class="counter" data-target="100">0</h3>
+<p>Creative Ideas</p>
+</div>
+
+<div class="glass-card stat">
+<h3 class="counter" data-target="100">0</h3>
+<p>Client Satisfaction %</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- SKILLS -->
+
+<section id="skills">
+
+<div class="section-title">
+<h2>Skills</h2>
+<p>Technologies and tools I use.</p>
+</div>
+
+<div class="skills">
+
+<div class="glass-card skill">HTML5</div>
+<div class="glass-card skill">CSS3</div>
+<div class="glass-card skill">JavaScript</div>
+<div class="glass-card skill">React</div>
+<div class="glass-card skill">Node.js</div>
+<div class="glass-card skill">Express.js</div>
+<div class="glass-card skill">MongoDB</div>
+<div class="glass-card skill">Firebase</div>
+<div class="glass-card skill">Git & GitHub</div>
+<div class="glass-card skill">Responsive Design</div>
+<div class="glass-card skill">UI / UX Design</div>
+<div class="glass-card skill">API Integration</div>
+
+</div>
+
+</section>
+
+<!-- PROJECTS -->
+
+<section id="projects">
+
+<div class="section-title">
+<h2>Featured Projects</h2>
+<p>Some of my recent work.</p>
+</div>
+
+<div class="projects">
+
+<div class="glass-card project">
+
+<img src="Image_8283.jpeg" alt="Project">
+
+<h3>Full Stack Application</h3>
+
+<p style="color:var(--muted);line-height:1.8;">
+A scalable web application built using modern frontend and backend
+technologies with excellent performance and user experience.
+</p>
+
+</div>
+
+<div class="glass-card project">
+
+<img src="Image_2394.jpeg" alt="Project">
+
+<h3>Professional Portfolio</h3>
+
+<p style="color:var(--muted);line-height:1.8;">
+A modern portfolio featuring responsive layouts, animations,
+and premium user experience.
+</p>
+
+</div>
+
+<div class="glass-card project">
+
+<img src="Image_2451.jpeg" alt="Project">
+
+<h3>Analytics Dashboard</h3>
+
+<p style="color:var(--muted);line-height:1.8;">
+A powerful dashboard displaying real-time analytics and business
+insights through interactive charts.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- CONTACT -->
+
+<section id="contact">
+
+<div class="section-title">
+<h2>Get In Touch</h2>
+<p>Let's build something amazing together.</p>
+</div>
+
+<div class="contact-grid">
+
+<a
+href="mailto:cscript09@gmail.com"
+class="glass-card contact-card">
+
+<h3>📧 Email</h3>
+
+<p style="color:var(--muted);">
+cscript09@gmail.com
+</p>
+
+</a>
+
+<a
+href="tel:+2349169363945"
+class="glass-card contact-card">
+
+<h3>📞 Phone</h3>
+
+<p style="color:var(--muted);">
++234 916 936 3945
+</p>
+
+</a>
+
+<a
+href="https://wa.me/qr/KQQT33SE7MJSE1"
+target="_blank"
+class="glass-card contact-card">
+
+<h3>💬 WhatsApp</h3>
+
+<p style="color:var(--muted);">
+Chat directly with me
+</p>
+
+</a>
+
+</div>
+
+</section>
+
+<footer>
+© 2026 CODECORE_X • Premium Portfolio • All Rights Reserved
+</footer>
+
+<a
+href="https://wa.me/qr/KQQT33SE7MJSE1"
+target="_blank"
+class="whatsapp-float">
+💬
+</a>
+<script>
+// ================= LOADER =================
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    document.getElementById("loader").style.display = "none";
+  }, 1200);
+});
+
+// ================= PROGRESS BAR =================
+window.addEventListener("scroll", () => {
+  const scrollTop = document.documentElement.scrollTop;
+  const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const progress = (scrollTop / scrollHeight) * 100;
+  document.getElementById("progressBar").style.width = progress + "%";
+});
+
+// ================= TYPING ANIMATION =================
+const roles = [
+  "Software Engineer",
+  "Full Stack Developer",
+  "UI/UX Designer",
+  "Problem Solver"
+];
+
+let roleIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+
+function typeEffect() {
+  const typingEl = document.getElementById("typing");
+  const currentRole = roles[roleIndex];
+
+  if (isDeleting) {
+    charIndex--;
+  } else {
+    charIndex++;
+  }
+
+  typingEl.textContent = currentRole.substring(0, charIndex);
+
+  if (!isDeleting && charIndex === currentRole.length) {
+    isDeleting = true;
+    setTimeout(typeEffect, 1200);
+    return;
+  }
+
+  if (isDeleting && charIndex === 0) {
+    isDeleting = false;
+    roleIndex = (roleIndex + 1) % roles.length;
+  }
+
+  setTimeout(typeEffect, isDeleting ? 60 : 120);
+}
+
+typeEffect();
+
+// ================= COUNTER ANIMATION =================
+const counters = document.querySelectorAll(".counter");
+
+counters.forEach(counter => {
+  counter.innerText = "0";
+
+  const updateCounter = () => {
+    const target = +counter.getAttribute("data-target");
+    const current = +counter.innerText;
+
+    const increment = target / 100;
+
+    if (current < target) {
+      counter.innerText = Math.ceil(current + increment);
+      setTimeout(updateCounter, 30);
+    } else {
+      counter.innerText = target;
+    }
+  };
+
+  updateCounter();
+});
+
+// ================= SCROLL REVEAL =================
+const revealElements = document.querySelectorAll(".glass-card");
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.transform = "translateY(0)";
+      entry.target.style.opacity = "1";
+    }
+  });
+}, { threshold: 0.1 });
+
+revealElements.forEach(el => {
+  el.style.opacity = "0";
+  el.style.transform = "translateY(30px)";
+  el.style.transition = "0.6s ease";
+  observer.observe(el);
+});
+</script>
+
+</body>
+</html>
